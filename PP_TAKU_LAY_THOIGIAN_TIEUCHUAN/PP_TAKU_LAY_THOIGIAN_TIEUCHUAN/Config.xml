@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database>
+  <Infor>
+    <!--Thu muc chua file sinh ra cac file ket qua-->
+    <PathFileResult>
+      <Path>D:\hoai\Hoai_Daotao\vs\PP\PP_TAKU_LAY_THOIGIAN_TIEUCHUAN\Tai_lieu_PP_Taku\FILE_KET_QUA.xlsx</Path>
+      <SheetNameAll>Sheet1</SheetNameAll>
+      <SheetNameNew>Result</SheetNameNew>
+    </PathFileResult>
+    <DateGet>
+      <DateStart>-10</DateStart>
+      <DateEnd>-1</DateEnd>
+    </DateGet>
+    <PathFileLog>D:\hoai\Hoai_Daotao\vs\PP\PP_TAKU_LAY_THOIGIAN_TIEUCHUAN\Tai_lieu_PP_Taku\Logrun.txt</PathFileLog>
+    <WrongNumber>
+      <NhietDoHan>2</NhietDoHan>
+      <NhietDoN2>2</NhietDoN2>
+      <Nozzle>3</Nozzle>
+      <Takt>3</Takt>
+    </WrongNumber>
+  </Infor>
+  <ListMachine>
+    <!--Thuc hien du lieu config cua cac line-->
+    <Machine line="1">
+      <FolderGet>D:\hoai\Hoai_Daotao\vs\PP\PP_TAKU_LAY_THOIGIAN_TIEUCHUAN\Tai_lieu_PP_Taku\folder_lay</FolderGet>
+    </Machine>
+  </ListMachine>
+</Database>
