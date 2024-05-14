@@ -60,7 +60,7 @@ namespace PP1_HIEUSUAT
                 {
                     throw new Exception("Tất cả các folder Machine đều không kết nối!");
                 }
-                string machineError = listErr.Any() ? " - " + string.Join("@", listErr.Select(p => p.pathFolder)) : "";
+                string machineError = listErr.Any() ? "- Không kết nối:" + string.Join("@", listErr.Select(p => p.pathFolder)) : "";
 
                 //Thuc hien lay du lieu cua cac file
                 ActionFileLog.WriteResultOKNG(configGet.pathFileLog, $"OK{textAdd}{machineError}");
@@ -69,10 +69,10 @@ namespace PP1_HIEUSUAT
             {
                 ActionFileLog.WriteResultOKNG(configGet.pathFileLog, ex.Message);
             }
-
             //Thuc hien dong
             Application.Exit();
         }
     }
     
 }
+

@@ -38,9 +38,9 @@ namespace PP1_HIEUSUAT
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(181, 53);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(141, 13);
+            this.label1.Size = new System.Drawing.Size(106, 13);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Version: 26/04/2024 11H52";
+            this.label1.Text = "Version: 03/05/2024";
             // 
             // Form1
             // 

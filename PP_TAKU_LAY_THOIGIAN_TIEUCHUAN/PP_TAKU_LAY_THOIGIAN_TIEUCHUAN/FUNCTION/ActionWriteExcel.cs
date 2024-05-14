@@ -75,8 +75,6 @@ namespace PP1_HIEUSUAT.FUNCTION
 
         private static void CheckDataAddNew(List<DataGetCSV> listDataOld, List<DataGetCSV> listDataGet, DataConfig configGet, List<DataGetCSV> listVer)
         {
-            //Thuc hien tinh toan MinMax cua du lieu cu
-            listDataOld.ForEach(p => p.SetMinMax(configGet));
 
             //Thuc hien lay du lieu cua cua cac model
             HashSet<string> listItemAll = new HashSet<string>(listDataOld.Select(p => p.model)
@@ -109,6 +107,31 @@ namespace PP1_HIEUSUAT.FUNCTION
                     continue;//Neu khong data Old ma khong co thi thuc hien duyet => dung thoi
                 }
 
+
+                //Duyet trong listItemInNew
+                foreach (var itemNew in listItemInNew)
+                {
+                    //Kiem tra xem no ton tai trong bang chua
+                    bool checkExist = listItemInDataOld.Any(p => p.dateUpdate.ToString() == itemNew.dateUpdate.ToString()
+                                                               && p.timeObject.ToString() == itemNew.timeUpdate.ToString("HH:mm:ss")
+                                                               && p.nhietdoHan == itemNew.nhietdoHan
+                                                                && p.nhietdoN2 == itemNew.nhietdoN2
+                                                                && p.takt == itemNew.takt
+                                                                && p.nozzle == itemNew.nozzle);
+                    itemNew.actionCheck = checkExist;//Neu da ton tai roi thi khong thuc hien add nua
+
+                }
+
+                //Thuc hien chi lay con nao == false
+                listItemInNew = listItemInNew.Where(p => p.actionCheck == false).ToList();
+
+                //Neu ma khong co du lieu trong cai moi => thi thuc hien lay cai cu
+                if (listItemInNew.Count == 0)
+                {
+                    listVer.Add(new DataGetCSV(listItemInDataOld[listItemInDataOld.Count - 1]));//Neu khong co du lieu thi mac dinh lay cai cuoi cung
+                    continue;//Thuc hien add xong thi chuyen sang Item khac
+                }
+
                 //Lay so luong hien co
                 numberCurrent = listItemInDataOld.Count;
 
@@ -125,7 +148,7 @@ namespace PP1_HIEUSUAT.FUNCTION
                     //Thuc hien khong add nua vi no giong voi con vua them roi
                     itemCheck.actionCheck = true;
 
-                    if (listItemInNew.Count == 1)//Neu chi co 1  thang thi thuc hien lay thang cu
+                    if (listItemInNew.Count == 1)//Neu chi co 1  thang thi thuc hien lay cu
                     {
                         listVer.Add(new DataGetCSV(itemOld));
                     }
@@ -147,8 +170,6 @@ namespace PP1_HIEUSUAT.FUNCTION
                     //Neu co du lieu => thi lay du lieu cuoi cung cua file
                     listVer.Add(new DataGetCSV(listItemInNew[listItemInNew.Count - 1]));
                 }
-
-
             }
 
         }
@@ -225,7 +246,7 @@ namespace PP1_HIEUSUAT.FUNCTION
 
         private static object[,] GetValueWrite(List<DataGetCSV> listDataWrite)
         {
-            object[,] multiArray = new object[listDataWrite.Count, 9];
+            object[,] multiArray = new object[listDataWrite.Count, 8];
             for (int i = 0; i < listDataWrite.Count; i++)
             {
                 multiArray[i, 0] = listDataWrite[i].model;
@@ -241,13 +262,13 @@ namespace PP1_HIEUSUAT.FUNCTION
         }
         private static object[,] GetValueWriteVer(List<DataGetCSV> listDataWrite)
         {
-            object[,] multiArray = new object[listDataWrite.Count, 9];
+            object[,] multiArray = new object[listDataWrite.Count, 8];
             for (int i = 0; i < listDataWrite.Count; i++)
             {
                 multiArray[i, 0] = listDataWrite[i].model;
                 multiArray[i, 1] = listDataWrite[i].numberSort;
                 multiArray[i, 2] = listDataWrite[i].dateUpdate;
-                multiArray[i, 3] = listDataWrite[i].timeObject == null? listDataWrite[i].timeUpdate.ToString("HH:mm:ss"): listDataWrite[i].timeObject;
+                multiArray[i, 3] = listDataWrite[i].timeObject == null ? listDataWrite[i].timeUpdate.ToString("HH:mm:ss") : listDataWrite[i].timeObject;
                 multiArray[i, 4] = listDataWrite[i].nhietdoHan;
                 multiArray[i, 5] = listDataWrite[i].nhietdoN2;
                 multiArray[i, 6] = listDataWrite[i].nozzle;

@@ -33,11 +33,11 @@ namespace PP1_HIEUSUAT.DTO
         public DataGetCSV() { }
 
         public DataGetCSV(string dateString,
-            object model, 
+            string modelTemp, 
             object dateUpdate, object timeGet, 
             object nhietdoHan, object nhietdoN2, object nozzle, object takt)
         {
-            this.model = model.ToString().Trim();
+            this.model = modelTemp;
             this.dateUpdate = dateUpdate;
 
             //Thuc hien lay thoi gian khong muon lay truc tiep tu dageUpdate co thi bi sai hoac khac khi thay doi dinh dang

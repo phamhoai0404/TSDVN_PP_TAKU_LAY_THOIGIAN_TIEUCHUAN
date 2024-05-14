@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.ComTypes;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Shapes;
@@ -89,9 +90,15 @@ namespace PP1_HIEUSUAT.FUNCTION
                             {
                                 if (delimitedLine[16].ToString() == "OK")
                                 {
+                                    string modelTemp = delimitedLine[0]?.ToString().Trim();
+                                    if (!Regex.IsMatch(modelTemp, @"^\w{4}-\w{4}$"))
+                                    {
+                                        return;
+                                    }
+
                                     listDataGet.Add(new DataGetCSV(
                                         dateString,
-                                        delimitedLine[0],
+                                        modelTemp,
                                         delimitedLine[1], delimitedLine[2],
                                         delimitedLine[3], delimitedLine[4], delimitedLine[10], delimitedLine[17]
                                     ));
